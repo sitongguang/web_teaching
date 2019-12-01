@@ -5,6 +5,7 @@ import cn.edu.sdjzu.xg.bysj.dao.GraduateProjectStatusDao;
 import cn.edu.sdjzu.xg.bysj.domain.GraduateProject;
 import cn.edu.sdjzu.xg.bysj.domain.GraduateProjectStatus;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public final class GraduateProjectStatusService {
@@ -32,12 +33,12 @@ public final class GraduateProjectStatusService {
 		return graduateProjectStatusDao.add(graduateProjectStatus);
 	}
 
-	public boolean delete(Integer id){
+	public boolean delete(Integer id)throws SQLException{
 		GraduateProjectStatus graduateProjectStatus = this.find(id);
 		return this.delete(graduateProjectStatus);
 	}
 
-	public boolean delete(GraduateProjectStatus graduateProjectStatus){
+	public boolean delete(GraduateProjectStatus graduateProjectStatus)throws SQLException {
 		//获得所有处于本状态的课题（GraduateProject）
 		Collection<GraduateProject> graduateProjectSet = GraduateProjectService.getInstance().findAll(graduateProjectStatus);
 		//若没有处于本状态的课题，则能够删除
