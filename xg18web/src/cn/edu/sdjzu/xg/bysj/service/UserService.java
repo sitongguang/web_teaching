@@ -57,16 +57,7 @@ public final class UserService {
 	 * @throws SQLException
 	 */
 	public User login(User userToLogin) throws SQLException {
-		Collection<User> users = this.findAll();
-
-		User desiredUser = null;
-		for(User user:users){
-			if(userToLogin.getUsername().equals(user.getUsername()) && userToLogin.getPassword().equals(user.getPassword())){
-				desiredUser = user;
-				break;
-			}
-		}
-		return desiredUser;
+		return this.login(userToLogin.getUsername(),userToLogin.getPassword());
 	}
 
 	/**
