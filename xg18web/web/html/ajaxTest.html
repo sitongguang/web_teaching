@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>title</title>
+    <script src="../js/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    url : "/ajaxTest", //请求服务器资源
+                    type : "post",
+                    // dataTpye : "json",
+                    success : function(msg) {
+                        var str= eval("(" + msg + ")");//json字串->json对象,方便遍历
+                        var s = "<tr><td>Name</td><td>url</td></tr>";
+                        for (var i in str.sites){
+                            s += "<tr><td>" + str.sites[i].name + "</td><td>" + str.sites[i].url + "</td></tr>";
+                            $("#table").html(s);
+                        }
+                    },
+                    error:function(){  //请求失败的回调方法
+                        alert("请求失败，请重试!");
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <button id="btn">Ajax 返回json</button>
+    <table border = "1px" bgcolor="#ffe4c4" id = "table">
+    </table>
+
+</body>
+</html>

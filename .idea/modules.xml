@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/xg18.iml" filepath="$PROJECT_DIR$/xg18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xg18web/xg18web.iml" filepath="$PROJECT_DIR$/xg18web/xg18web.iml" />
+    </modules>
+  </component>
+</project>
