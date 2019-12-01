@@ -63,20 +63,20 @@ public final class GraduateProjectDao {
     }
 
 
-    public Collection<GraduateProject> findAll() {
+    public Collection<GraduateProject> findAll()throws SQLException {
         return projects;
     }
 
-    public void addGraduateProject(GraduateProject project) {
+    public void addGraduateProject(GraduateProject project)throws SQLException {
         projects.add(project);
     }
 
-    public void update(GraduateProject project) {
+    public void update(GraduateProject project) throws SQLException{
         projects.remove(project);
         this.addGraduateProject(project);
     }
 
-    public GraduateProject find(Integer id) {
+    public GraduateProject find(Integer id) throws SQLException{
         GraduateProject desiredGraduateProject = null;
         for (GraduateProject graduateProject : projects) {
             if (id.equals(graduateProject.getId())) {
@@ -88,7 +88,7 @@ public final class GraduateProjectDao {
 
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws SQLException{
         Iterator<GraduateProject> it = projects.iterator();
         while (it.hasNext()) {
             GraduateProject g = it.next();
