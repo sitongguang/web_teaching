@@ -5,8 +5,7 @@ import cn.edu.sdjzu.xg.bysj.service.DepartmentService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
+
 import util.JSONUtil;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ import java.util.Collection;
 @WebServlet("/department.ctl")
 public class DepartmentController extends HttpServlet {
 //    private static Logger log = LoggerFactory.g
-    Logger  logger = Logger.getLogger("com.foo");
+//    Logger  logger = Logger.getLogger("com.foo");
     //请使用以下JSON测试增加功能(id为空)
 
     //{"description":"id为null新系","no":"0201","remarks":"","department":{"description":"管理工程","id":2,"no":"02","remarks":"最好的系"}}
@@ -63,11 +62,11 @@ public class DepartmentController extends HttpServlet {
             message.put("message", "增加成功");
         } catch (SQLException e) {
             message.put("message", "数据库操作异常");
-            logger.error(e.getStackTrace());
+//            logger.error(e.getStackTrace());
             e.printStackTrace();
         } catch (Exception e) {
             message.put("message", "网络异常");
-            logger.error(e.getStackTrace());
+//            logger.error(e.getStackTrace());
             e.printStackTrace();
         }
         //响应message到前端
