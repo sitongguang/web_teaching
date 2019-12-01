@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>title</title>
+    <script src="../../js/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+                $.ajax({
+                url : "/degree/list.ctl", //请求服务器资源（对应cn.edu.sdjzu.xg.bysj.controller.basic.degree.ListDegreeController）
+                type : "get",
+
+                success : function(msg) {//请求成功的回调方法
+                    var degrees = eval("(" + msg + ")");//json字串->jQuery对象,方便遍历
+                    var table = "<tr><td>编号</td><td>名称</td><td>operation</td></tr>";
+                    for (var i in obj){
+                        table += "<tr>"
+                                +"<td>" + degrees[i].no + "</td>"
+                                +"<td>" + degrees[i].description + "</td>"
+                                //加入删除超链接，其中degrees[i].id响应数据中的id字段值
+                                + "<td>"
+                                + "<a href='' onclick=deleteDegree(" + degrees[i].id + ")>delete</a>"
+                                +"</td>"
+                            + "</tr>";
+
+                    }
+                    $("#table").html(table);
+
+                },
+                error:function(){  //请求失败的回调方法
+                    alert("请求失败，请重试!");
+                }
+            });
+        });
+
+        //deleteDegree
+        function deleteDegree(id) {
+            confirm_ = confirm('确认删除?');
+            // alert(id);
+            if(confirm_){
+                $.ajax({
+                    type:"get",
+                    url:"/degree/delete.ctl",
+                    //请求后台时所传递的参数
+                    data:{
+                        "id":id
+                    },
+                    //参数类型为json
+                    contentType: "application/json,charset = utf-8",
+                    //返回值格式为json
+                    dataType:"json",
+                    success:function(msg){
+                        // 因为本次请求的url会被重定向到degree.html，所以正常情况下，这里不会返回信息
+                    },
+                    error:function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+
+<table border = "1px" bgcolor="#ffe4c4" id = "table">
+</table>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>增加学院</title>
+        <script src="../../js/jquery.js"></script>
+        <script src="../../js/serializeObject.js"></script>
+
+        <script type="application/javascript">
+            //提交函数
+            function submit_onClick() {
+                //调用serializeObject函数，将表单数据序列化，形成JSON对象
+                var formData = $('#schoolForm').serializeObject();
+                //JSON对象文本化
+                var school_json = JSON.stringify(formData);
+                //Ajax请求
+                $.ajax({
+                    url: "/school/add.ctl",
+                    type: "post",
+                    //请求参数
+                    data: school_json,
+                    //请求参数字符集
+                    contentType: "application/json;charset=utf-8",
+                    //响应数据的格式
+                    dataType: "json",
+                    success: function (msg) {
+                        // 响应数据为JSON对象，而非字串，故无须转换
+                        alert("状态:" + msg.MSG);
+                        //重定向
+                        window.location.replace("/html/basic/school.html");
+                    },
+                    error: function (msg) {
+                        alert("添加失败");
+                    }
+                });
+            }
+        </script>
+
+    </head>
+    <body>
+        <form id="schoolForm">
+            <label for = "no">NO</label>
+            <input name="no" id="no" value="02"/>
+
+            <label for = "description">DESCRIPTION</label>
+            <input name="description" id = "description" value="管理"/>
+
+            <input type="button" name="submit"
+                   onclick="submit_onClick();" value="提交"/>
+        </form>
+    </body>
+</html>
