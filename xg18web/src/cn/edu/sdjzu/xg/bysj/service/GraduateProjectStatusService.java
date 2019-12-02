@@ -17,19 +17,19 @@ public final class GraduateProjectStatusService {
 		return graduateProjectStatusService;
 	}
 
-	public Collection<GraduateProjectStatus> findAll(){
+	public Collection<GraduateProjectStatus> findAll()throws SQLException{
 		return graduateProjectStatusDao.findAll();
 	}
 
-	public GraduateProjectStatus find(Integer id){
+	public GraduateProjectStatus find(Integer id)throws SQLException{
 		return graduateProjectStatusDao.find(id);
 	}
 
-	public boolean update(GraduateProjectStatus graduateProjectStatus){
+	public boolean update(GraduateProjectStatus graduateProjectStatus)throws SQLException{
 		return graduateProjectStatusDao.update(graduateProjectStatus);
 	}
 
-	public boolean add(GraduateProjectStatus graduateProjectStatus){
+	public boolean add(GraduateProjectStatus graduateProjectStatus)throws SQLException{
 		return graduateProjectStatusDao.add(graduateProjectStatus);
 	}
 
