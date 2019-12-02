@@ -1,7 +1,7 @@
 package cn.edu.sdjzu.xg.bysj.controller.basic;
 
-import cn.edu.sdjzu.xg.bysj.domain.Degree;
-import cn.edu.sdjzu.xg.bysj.service.DegreeService;
+import cn.edu.sdjzu.xg.bysj.domain.GraduateProjectCategory;
+import cn.edu.sdjzu.xg.bysj.service.GraduateProjectCategoryService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -19,16 +19,16 @@ import java.util.Collection;
 /**
  * 将所有方法组织在一个Controller(Servlet)中
  */
-@WebServlet("/degree.ctl")
+@WebServlet("/graduateProjectCategory.ctl")
 public class GraduateProjectCategoryController extends HttpServlet {
     //请使用以下JSON测试增加功能（id为空）
-    //{"description":"id为null的新学位","no":"05","remarks":""}
+    //{"description":"id为null的新课题类别","no":"05","remarks":""}
     //请使用以下JSON测试修改功能
-    //{"description":"修改id=1的学位","id":1,"no":"05","remarks":""}
+    //{"description":"修改id=1的课题类别","id":1,"no":"05","remarks":""}
 
     /**
-     * POST, http://localhost:8080/degree.ctl, 增加学位
-     * 增加一个学位对象：将来自前端请求的JSON对象，增加到数据库表中
+     * POST, http://localhost:8080/graduateProjectCategory.ctl, 增加课题类别
+     * 增加一个课题类别对象：将来自前端请求的JSON对象，增加到数据库表中
      *
      * @param request  请求对象
      * @param response 响应对象
@@ -41,20 +41,20 @@ public class GraduateProjectCategoryController extends HttpServlet {
         //设置请求字符编码为UTF-8
         request.setCharacterEncoding("UTF-8");
         //根据request对象，获得代表参数的JSON字串
-        String degree_json = JSONUtil.getJSON(request);
+        String graduateProjectCategory_json = JSONUtil.getJSON(request);
 
-        //将JSON字串解析为Degree对象
-        Degree degreeToAdd = JSON.parseObject(degree_json, Degree.class);
+        //将JSON字串解析为GraduateProjectCategory对象
+        GraduateProjectCategory graduateProjectCategoryToAdd = JSON.parseObject(graduateProjectCategory_json, GraduateProjectCategory.class);
         //前台没有为id赋值，此处模拟自动生成id。如果Dao能真正完成数据库操作，删除下一行。
-        degreeToAdd.setId(4 + (int) (Math.random() * 100));
+        graduateProjectCategoryToAdd.setId(4 + (int) (Math.random() * 100));
 
         //设置响应字符编码为UTF-8
         response.setContentType("text/html;charset=UTF-8");
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
-        //在数据库表中增加Degree对象
+        //在数据库表中增加GraduateProjectCategory对象
         try {
-            DegreeService.getInstance().add(degreeToAdd);
+            GraduateProjectCategoryService.getInstance().add(graduateProjectCategoryToAdd);
             message.put("message", "增加成功");
         } catch (SQLException e) {
             message.put("message", "数据库操作异常");
@@ -68,8 +68,8 @@ public class GraduateProjectCategoryController extends HttpServlet {
     }
 
     /**
-     * DELETE, http://localhost:8080/degree.ctl?id=1, 删除id=1的学位
-     * 删除一个学位对象：根据来自前端请求的id，删除数据库表中id的对应记录
+     * DELETE, http://localhost:8080/graduateProjectCategory.ctl?id=1, 删除id=1的课题类别
+     * 删除一个课题类别对象：根据来自前端请求的id，删除数据库表中id的对应记录
      *
      * @param request
      * @param response
@@ -87,9 +87,9 @@ public class GraduateProjectCategoryController extends HttpServlet {
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
 
-        //到数据库表中删除对应的学位
+        //到数据库表中删除对应的课题类别
         try {
-            DegreeService.getInstance().delete(id);
+            GraduateProjectCategoryService.getInstance().delete(id);
             message.put("message", "删除成功");
         } catch (SQLException e) {
             message.put("message", "数据库操作异常");
@@ -104,9 +104,9 @@ public class GraduateProjectCategoryController extends HttpServlet {
 
 
     /**
-     * PUT, http://localhost:8080/degree.ctl, 修改学位
+     * PUT, http://localhost:8080/graduateProjectCategory.ctl, 修改课题类别
      * <p>
-     * 修改一个学位对象：将来自前端请求的JSON对象，更新数据库表中相同id的记录
+     * 修改一个课题类别对象：将来自前端请求的JSON对象，更新数据库表中相同id的记录
      *
      * @param request
      * @param response
@@ -118,17 +118,17 @@ public class GraduateProjectCategoryController extends HttpServlet {
             throws ServletException, IOException {
         //设置请求字符编码为UTF-8
         request.setCharacterEncoding("UTF-8");
-        String degree_json = JSONUtil.getJSON(request);
-        //将JSON字串解析为Degree对象
-        Degree degreeToAdd = JSON.parseObject(degree_json, Degree.class);
+        String graduateProjectCategory_json = JSONUtil.getJSON(request);
+        //将JSON字串解析为GraduateProjectCategory对象
+        GraduateProjectCategory graduateProjectCategoryToAdd = JSON.parseObject(graduateProjectCategory_json, GraduateProjectCategory.class);
 
         //设置响应字符编码为UTF-8
         response.setContentType("text/html;charset=UTF-8");
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
-        //到数据库表修改Degree对象对应的记录
+        //到数据库表修改GraduateProjectCategory对象对应的记录
         try {
-            DegreeService.getInstance().update(degreeToAdd);
+            GraduateProjectCategoryService.getInstance().update(graduateProjectCategoryToAdd);
             message.put("message", "修改成功");
         } catch (SQLException e) {
             message.put("message", "数据库操作异常");
@@ -142,9 +142,9 @@ public class GraduateProjectCategoryController extends HttpServlet {
     }
 
     /**
-     * GET, http://localhost:8080/degree.ctl?id=1, 查询id=1的学位
-     * GET, http://localhost:8080/degree.ctl, 查询所有的学位
-     * 把一个或所有学位对象响应到前端
+     * GET, http://localhost:8080/graduateProjectCategory.ctl?id=1, 查询id=1的课题类别
+     * GET, http://localhost:8080/graduateProjectCategory.ctl, 查询所有的课题类别
+     * 把一个或所有课题类别对象响应到前端
      *
      * @param request
      * @param response
@@ -162,12 +162,12 @@ public class GraduateProjectCategoryController extends HttpServlet {
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
         try {
-            //如果id = null, 表示响应所有学位对象，否则响应id指定的学位对象
+            //如果id = null, 表示响应所有课题类别对象，否则响应id指定的课题类别对象
             if (id_str == null) {
-                responseDegrees(response);
+                responseGraduateProjectCategorys(response);
             } else {
                 int id = Integer.parseInt(id_str);
-                responseDegree(id, response);
+                responseGraduateProjectCategory(id, response);
             }
         } catch (SQLException e) {
             message.put("message", "数据库操作异常");
@@ -182,25 +182,25 @@ public class GraduateProjectCategoryController extends HttpServlet {
         }
     }
 
-    //响应一个学位对象
-    private void responseDegree(int id, HttpServletResponse response)
+    //响应一个课题类别对象
+    private void responseGraduateProjectCategory(int id, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        //根据id查找学位
-        Degree degree = DegreeService.getInstance().find(id);
-        String degree_json = JSON.toJSONString(degree);
+        //根据id查找课题类别
+        GraduateProjectCategory graduateProjectCategory = GraduateProjectCategoryService.getInstance().find(id);
+        String graduateProjectCategory_json = JSON.toJSONString(graduateProjectCategory);
 
-        //响应degree_json到前端
-        response.getWriter().println(degree_json);
+        //响应graduateProjectCategory_json到前端
+        response.getWriter().println(graduateProjectCategory_json);
     }
 
-    //响应所有学位对象
-    private void responseDegrees(HttpServletResponse response)
+    //响应所有课题类别对象
+    private void responseGraduateProjectCategorys(HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        //获得所有学位
-        Collection<Degree> degrees = DegreeService.getInstance().findAll();
-        String degrees_json = JSON.toJSONString(degrees, SerializerFeature.DisableCircularReferenceDetect);
+        //获得所有课题类别
+        Collection<GraduateProjectCategory> graduateProjectCategorys = GraduateProjectCategoryService.getInstance().findAll();
+        String graduateProjectCategorys_json = JSON.toJSONString(graduateProjectCategorys, SerializerFeature.DisableCircularReferenceDetect);
 
-        //响应degrees_json到前端
-        response.getWriter().println(degrees_json);
+        //响应graduateProjectCategorys_json到前端
+        response.getWriter().println(graduateProjectCategorys_json);
     }
 }
