@@ -37,7 +37,21 @@ public final class GraduateProjectType implements Comparable<GraduateProjectType
 		return remarks;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
 	/**
 	 * Constructs a <code>String</code> with all attributes
