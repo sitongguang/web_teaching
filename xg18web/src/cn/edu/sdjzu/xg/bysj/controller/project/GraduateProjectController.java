@@ -22,15 +22,15 @@ import java.util.Collection;
 @WebServlet("/graduateProject.ctl")
 public class GraduateProjectController extends HttpServlet {
     //请使用以下JSON测试增加功能
-    //{"degree":{"description":"博士","id":1,"no":"01","remarks":""},"department":{"description":"信息管理","id":2,"no":"0202","remarks":"","graduateProject":{"description":"管理工程","id":2,"no":"02","remarks":"最好的教师"}},"id":7,"name":"id=7 的新的新老师","title":{"description":"副教授","id":2,"no":"02","remarks":""}}
+    //{"degree":{"description":"博士","id":1,"no":"01","remarks":""},"department":{"description":"信息管理","id":2,"no":"0202","remarks":"","graduateProject":{"description":"管理工程","id":2,"no":"02","remarks":"最好的课题"}},"id":7,"name":"id=7 的新的新老师","title":{"description":"副教授","id":2,"no":"02","remarks":""}}
     //请使用以下JSON测试修改功能
     //{"description":"修改id=1的老师
-    //{"degree":{"description":"博士","id":1,"no":"01","remarks":""},"department":{"description":"信息管理","id":2,"no":"0202","remarks":"","graduateProject":{"description":"管理工程","id":2,"no":"02","remarks":"最好的教师"}},"id":1,"name":"修改id=1的老师","title":{"description":"副教授","id":2,"no":"02","remarks":""}}
+    //{"degree":{"description":"博士","id":1,"no":"01","remarks":""},"department":{"description":"信息管理","id":2,"no":"0202","remarks":"","graduateProject":{"description":"管理工程","id":2,"no":"02","remarks":"最好的课题"}},"id":1,"name":"修改id=1的老师","title":{"description":"副教授","id":2,"no":"02","remarks":""}}
 
 
     /**
-     * POST, http://localhost:8080/graduateProject.ctl, 增加教师
-     * 增加一个教师对象：将来自前端请求的JSON对象，增加到数据库表中
+     * POST, http://localhost:8080/graduateProject.ctl, 增加课题
+     * 增加一个课题对象：将来自前端请求的JSON对象，增加到数据库表中
      *
      * @param request  请求对象
      * @param response 响应对象
@@ -70,8 +70,8 @@ public class GraduateProjectController extends HttpServlet {
     }
 
     /**
-     * DELETE, http://localhost:8080/graduateProject.ctl?id=1, 删除id=1的教师
-     * 删除一个教师对象：根据来自前端请求的id，删除数据库表中id的对应记录
+     * DELETE, http://localhost:8080/graduateProject.ctl?id=1, 删除id=1的课题
+     * 删除一个课题对象：根据来自前端请求的id，删除数据库表中id的对应记录
      *
      * @param request
      * @param response
@@ -89,7 +89,7 @@ public class GraduateProjectController extends HttpServlet {
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
 
-        //到数据库表中删除对应的教师
+        //到数据库表中删除对应的课题
         try {
             GraduateProjectService.getInstance().delete(id);
             message.put("message", "删除成功");
@@ -106,9 +106,9 @@ public class GraduateProjectController extends HttpServlet {
 
 
     /**
-     * PUT, http://localhost:8080/graduateProject.ctl, 修改教师
+     * PUT, http://localhost:8080/graduateProject.ctl, 修改课题
      * <p>
-     * 修改一个教师对象：将来自前端请求的JSON对象，更新数据库表中相同id的记录
+     * 修改一个课题对象：将来自前端请求的JSON对象，更新数据库表中相同id的记录
      *
      * @param request
      * @param response
@@ -144,9 +144,9 @@ public class GraduateProjectController extends HttpServlet {
     }
 
     /**
-     * GET, http://localhost:8080/graduateProject.ctl?id=1, 查询id=1的教师
-     * GET, http://localhost:8080/graduateProject.ctl, 查询所有的教师
-     * 把一个或所有教师对象响应到前端
+     * GET, http://localhost:8080/graduateProject.ctl?id=1, 查询id=1的课题
+     * GET, http://localhost:8080/graduateProject.ctl, 查询所有的课题
+     * 把一个或所有课题对象响应到前端
      *
      * @param request
      * @param response
@@ -164,7 +164,7 @@ public class GraduateProjectController extends HttpServlet {
         //创建JSON对象message，以便往前端响应信息
         JSONObject message = new JSONObject();
         try {
-            //如果id = null, 表示响应所有教师对象，否则响应id指定的教师对象
+            //如果id = null, 表示响应所有课题对象，否则响应id指定的课题对象
             if (id_str == null) {
                 responseGraduateProjects(response);
             } else {
@@ -184,10 +184,10 @@ public class GraduateProjectController extends HttpServlet {
         }
     }
 
-    //响应一个教师对象
+    //响应一个课题对象
     private void responseGraduateProject(int id, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        //根据id查找教师
+        //根据id查找课题
         GraduateProject graduateProject = GraduateProjectService.getInstance().find(id);
         String graduateProject_json = JSON.toJSONString(graduateProject);
 
@@ -195,10 +195,10 @@ public class GraduateProjectController extends HttpServlet {
         response.getWriter().println(graduateProject_json);
     }
 
-    //响应所有教师对象
+    //响应所有课题对象
     private void responseGraduateProjects(HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        //获得所有教师
+        //获得所有课题
         Collection<GraduateProject> graduateProjects = GraduateProjectService.getInstance().findAll();
         String graduateProjects_json = JSON.toJSONString(graduateProjects, SerializerFeature.DisableCircularReferenceDetect);
 
