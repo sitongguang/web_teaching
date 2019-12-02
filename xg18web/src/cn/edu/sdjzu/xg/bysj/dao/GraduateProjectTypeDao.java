@@ -3,6 +3,7 @@ package cn.edu.sdjzu.xg.bysj.dao;
 
 import cn.edu.sdjzu.xg.bysj.domain.GraduateProjectType;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.TreeSet;
 
@@ -28,23 +29,23 @@ public final class GraduateProjectTypeDao {
         return graduateProjectTypeDao;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException{
         GraduateProjectTypeDao dao = new GraduateProjectTypeDao();
         Collection<GraduateProjectType> graduateProjectTypes = dao.finaAll();
         display(graduateProjectTypes);
     }
 
-    private static void display(Collection<GraduateProjectType> graduateProjectTypes) {
+    private static void display(Collection<GraduateProjectType> graduateProjectTypes) throws SQLException{
         for (GraduateProjectType graduateProjectType : graduateProjectTypes) {
             System.out.println(graduateProjectType);
         }
     }
 
-    public Collection<GraduateProjectType> finaAll() {
+    public Collection<GraduateProjectType> finaAll()throws SQLException {
         return GraduateProjectTypeDao.graduateProjectTypes;
     }
 
-    public GraduateProjectType find(Integer id) {
+    public GraduateProjectType find(Integer id) throws SQLException{
         GraduateProjectType desiredGraduateProjectType = null;
         for (GraduateProjectType graduateProjectType : graduateProjectTypes) {
             if (id.equals(graduateProjectType.getId())) {
@@ -54,21 +55,21 @@ public final class GraduateProjectTypeDao {
         return desiredGraduateProjectType;
     }
 
-    public boolean update(GraduateProjectType graduateProjectType) {
+    public boolean update(GraduateProjectType graduateProjectType) throws SQLException{
         graduateProjectTypes.remove(graduateProjectType);
         return graduateProjectTypes.add(graduateProjectType);
     }
 
-    public boolean add(GraduateProjectType graduateProjectType) {
+    public boolean add(GraduateProjectType graduateProjectType) throws SQLException {
         return graduateProjectTypes.add(graduateProjectType);
     }
 
-    public boolean delete(Integer id) {
+    public boolean delete(Integer id) throws SQLException{
         GraduateProjectType graduateProjectType = this.find(id);
         return this.delete(graduateProjectType);
     }
 
-    public boolean delete(GraduateProjectType graduateProjectType) {
+    public boolean delete(GraduateProjectType graduateProjectType) throws SQLException{
         return graduateProjectTypes.remove(graduateProjectType);
     }
 }
