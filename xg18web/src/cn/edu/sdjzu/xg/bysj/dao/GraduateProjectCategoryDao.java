@@ -3,6 +3,7 @@ package cn.edu.sdjzu.xg.bysj.dao;
 
 import cn.edu.sdjzu.xg.bysj.domain.GraduateProjectCategory;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.TreeSet;
 
@@ -28,17 +29,17 @@ public final class GraduateProjectCategoryDao {
                 : graduateProjectCategoryDao;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         GraduateProjectCategoryDao dao = new GraduateProjectCategoryDao();
         Collection<GraduateProjectCategory> graduateProjectCategories = dao
                 .findAll();
     }
 
-    public Collection<GraduateProjectCategory> findAll() {
+    public Collection<GraduateProjectCategory> findAll() throws SQLException {
         return GraduateProjectCategoryDao.graduateProjectCategories;
     }
 
-    public GraduateProjectCategory find(Integer id) {
+    public GraduateProjectCategory find(Integer id) throws SQLException{
         for (GraduateProjectCategory graduateProjectCategory : graduateProjectCategories) {
             if (id.equals(graduateProjectCategory.getId())) {
                 return graduateProjectCategory;
@@ -48,21 +49,21 @@ public final class GraduateProjectCategoryDao {
         return null;
     }
 
-    public boolean update(GraduateProjectCategory graduateProjectCategory) {
+    public boolean update(GraduateProjectCategory graduateProjectCategory)throws SQLException {
         graduateProjectCategories.remove(graduateProjectCategory);
         return graduateProjectCategories.add(graduateProjectCategory);
     }
 
-    public boolean add(GraduateProjectCategory graduateProjectCategory) {
+    public boolean add(GraduateProjectCategory graduateProjectCategory)throws SQLException {
         return graduateProjectCategories.add(graduateProjectCategory);
     }
 
-    public boolean delete(Integer id) {
+    public boolean delete(Integer id) throws SQLException{
         GraduateProjectCategory graduateProjectCategory = this.find(id);
         return this.delete(graduateProjectCategory);
     }
 
-    public boolean delete(GraduateProjectCategory graduateProjectCategory) {
+    public boolean delete(GraduateProjectCategory graduateProjectCategory)throws SQLException {
         return graduateProjectCategories.remove(graduateProjectCategory);
     }
 }
